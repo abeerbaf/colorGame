@@ -1,19 +1,42 @@
-var diffEls = document.querySelectorAll(".diff__btn");
-var diffEl = document.querySelector(".diff__btn.active").innerHTML;
-var n = diffEl;
-var colorsEl = document.querySelector(".colors");
-var colorsBlocks;
-var rgbEl = document.querySelector(".rgb");
-var statusEl = document.querySelector(".status");
-var colors = [];
+let diffEls = document.querySelectorAll(".diff__btn");
+let diffEl = document.querySelector(".diff__btn.active").innerHTML;
+let n = diffEl;
+let colorsEl = document.querySelector(".colors");
+let colorsBlocks;
+let rgbEl = document.querySelector(".rgb");
+let statusEl = document.querySelector(".status");
+let resetBtn = document.querySelector(".reset");
+let header = document.querySelector(".header");
+let colors = [];
+let pickedColor;
+
 createBlocks(n);
 resetGame();
 
-function checkColors(e) {
+function checkColors() {
   // your code here
+  for(let i =0; i < colorsBlocks.length; i++){
+    colorsBlocks[i].addEventListener('click', ()=>{
+      console.log(colorsBlocks[i].style.backgroundColor);
+      console.log(colorsBlocks[i].style.backgroundColor)
+      if(colorsBlocks[i].style.backgroundColor === colors[pickedColor]){
+        statusEl.textContent = "CORRECT!"
+        resetBtn.textContent = "New game";
+        changeColors();
+        header.style.backgroundColor = colors[pickedColor]
+        statusEl.style.backgroundColor = colors[pickColors]
+      }else{
+        colorsBlocks[i].style.backgroundColor = 'black'
+      }
+    })
+  }
+  
 }
 
 function resetGame() {
+
+  statusEl.style.backgroundColor = 'white'
+  header.style.backgroundColor = 'white'
   createBlocks(n);
   document.body.style.color = "black";
   colors = [];
@@ -23,6 +46,7 @@ function resetGame() {
   setColors();
   statusEl.innerHTML =
     "Try to guess the right color based on the RGB value by clicking on the blocks.";
+  setNumberOfTiles()
 }
 
 function setColors() {
@@ -47,6 +71,15 @@ function random(r) {
 
 function setNumberOfTiles(e) {
   // your code here
+  for(let i = 0; i <= 1; i++){
+    diffEls[i].addEventListener('click', ()=>{
+    diffEls[1].classList.remove('active');
+    diffEls[i].classList.remove('active');
+    diffEls[i].classList.add('active');
+    diffEls[0].innerHTML === '6' ? n = 6 : n = 9 ;
+    resetGame()
+    })
+  }
 }
 
 function createBlocks(num) {
@@ -61,5 +94,12 @@ function createBlocks(num) {
   colorsBlocks = document.querySelectorAll(".colors__block");
   for (var i = 0; i < colorsBlocks.length; i++) {
     colorsBlocks[i].addEventListener("click", checkColors);
+  }
+}
+
+
+function changeColors(){
+  for(let i = 0; i <colorsBlocks.length; i++){
+    colorsBlocks[i].style.backgroundColor = colors[pickedColor]
   }
 }

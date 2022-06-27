@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://beumsk.github.io/Color-Game" />
     <meta
       property="og:image"
-      content="https://beumsk.github.io/Color-Game/cover.jpg"
+      content="https://beumsk.github.io/Color-Game/cover.jpg" 
     />
     <meta
       property="og:image:secure_url"
@@ -33,13 +33,17 @@
     <title>Color Game</title>
   </head>
   <body class="mainbody">
-    <header>
+    <header class="header">
       <h1>Color Game</h1>
+      <h2 class="status" style="font-size:25px"></h2>
       <p class="status">
         Try to guess the right color based on the RGB value by clicking on the
         blocks.
       </p>
     </header>
+
+    <hr>
+    <button type="submit" class="reset" onclick=resetGame()>Reset</button>
 
     <main>
       <p class="rgb"></p>
